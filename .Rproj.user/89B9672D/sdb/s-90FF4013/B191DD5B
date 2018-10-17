@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(wholebrain)\nload('./data/all_rats.RData')\n\n",
+    "created" : 1539739214059.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3572434867",
+    "id" : "B191DD5B",
+    "lastKnownWriteTime" : 3904683772431302662,
+    "last_content_update" : 1539739364519,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
