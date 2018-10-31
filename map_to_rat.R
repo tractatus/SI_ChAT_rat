@@ -36,9 +36,10 @@ map.to.rat<-function(dataset, regi, col = 'lightblue'){
   
   
   index <- cbind(as.integer(round(back.warp$y)), as.integer(round(back.warp$x)))
-  index<-index[-which(index<0),]
   index[,2]<- (index[,2]+ regi$centroidNorm[2])
   index[,1]<- (index[,1]- regi$centroidNorm[1])
+  index<-index[-which(index<0),]
+  
   xT <- (index[,2] + (regi$transformationgrid$mx[index] - index[,2]))
   yT <- (index[,1] + (regi$transformationgrid$my[index] - index[,1]))
   
