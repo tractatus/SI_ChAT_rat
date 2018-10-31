@@ -1,3 +1,9 @@
+to.rat.stereotactic(dataset){
+  dataset$ML<-dataset$ML*1.56
+  dataset$DV<-dataset$DV*1.45
+  return(dataset)
+}
+
 map.to.rat<-function(dataset, regi, col = NULL, ...){
   if(is.null(col)){
     col<-dataset$color
