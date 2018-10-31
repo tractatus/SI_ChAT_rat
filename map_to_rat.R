@@ -36,21 +36,33 @@ map.to.rat<-function(dataset, regi, col = NULL, ...){
             border = 'black', lty = line.type[x], col = fill.col[x], lwd = line.width[x] )
   })
   
+  # lapply(1:regi$atlas$numRegions, function(x) {
+  #   polygon(regi$atlas$outlines[[x]]$xr/scale.factor, 
+  #           regi$atlas$outlines[[x]]$yr/scale.factor, 
+  #           border = 'orange', col='black', lty = line.type[x],  lwd = line.width[x])
+  # })
+  # lapply(1:regi$atlas$numRegions, function(x) {
+  #   polygon(regi$atlas$outlines[[x]]$xl/scale.factor, 
+  #           regi$atlas$outlines[[x]]$yl/scale.factor, 
+  #           border = 'orange', lty = line.type[x], col='black', lwd = line.width[x] )
+  # })
   
   
   index <- cbind(as.integer(round(back.warp$y)), as.integer(round(back.warp$x)))
-  index[,2]<- (index[,2]+ regi$centroidNorm[2])
-  index[,1]<- (index[,1]- regi$centroidNorm[1])
+  #index[,2]<- (index[,2]+ regi$centroidNorm[2])
+  #index[,1]<- (index[,1]- regi$centroidNorm[1])
+  index<-index*scale.factor
   
-  remove<-unique(c(which(index[,1]<0), which(index[,2]<0)))
+  remove<-unique(c(which(index[,1]<0 | index[,1]>dim(regi$transformationgrid$mx)[1] ), which(index[,2]<0 | index[,2]> dim(regi$transformationgrid$mx)[1] )))
   if(length(remove)>0){
     index<-index[-remove,]
     col<-col[-remove]
   }
+  #index<-index*scale.factor
   
   xT <- (index[,2] + (regi$transformationgrid$mx[index] - index[,2]))
   yT <- (index[,1] + (regi$transformationgrid$my[index] - index[,1]))
   
-  points(xT, yT, pch=16, col= col, ...)
+  points(xT/scale.factor, yT/scale.factor, pch=16, col= col, ...)
   
 }
