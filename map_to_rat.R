@@ -1,4 +1,7 @@
-map.to.rat<-function(dataset, regi, col = 'lightblue'){
+map.to.rat<-function(dataset, regi, col = NULL, ...){
+  if(is.null(col)){
+    col<-dataset$color
+  }
   back.warp<-stereotactic.coordinates(dataset$ML, dataset$DV, regi, inverse =TRUE)
   
   scale.factor <- mean(dim(regi$transformationgrid$mx)/c(regi$transformationgrid$height, 
@@ -38,11 +41,11 @@ map.to.rat<-function(dataset, regi, col = 'lightblue'){
   index <- cbind(as.integer(round(back.warp$y)), as.integer(round(back.warp$x)))
   index[,2]<- (index[,2]+ regi$centroidNorm[2])
   index[,1]<- (index[,1]- regi$centroidNorm[1])
-  index<-index[-which(index<0),]
-  
+  index<-index[-which(index[,1]<0),]
+  index<-index[-which(index[,2]<0),]
   xT <- (index[,2] + (regi$transformationgrid$mx[index] - index[,2]))
   yT <- (index[,1] + (regi$transformationgrid$my[index] - index[,1]))
   
-  points(xT, yT, pch=16, cex=0.2, col= col)
+  points(xT, yT, pch=16, col= col, ...)
   
 }
