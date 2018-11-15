@@ -6,7 +6,7 @@ plot.suggestions2<-function (dataset, normalize.by = NULL, group = NULL, title =
                                                                                         na.rm = TRUE), ci.fun = function(x) c(fun(x) - 1.96 * 
                                                                                                                                 se(x), fun(x) + 1.96 * se(x)), xlim = NULL, device = TRUE,  matching.string = NULL, ... ) 
 {
-  counts <- suggestions(dataset, exclude.below = exclude.below, 
+  counts <- wholebrain::suggestions(dataset, exclude.below = exclude.below, 
                         reduce.below = reduce.below)
   if (!is.null(exclude.regions)) {
     remove <- which(row.names(counts) %in% exclude.regions)
